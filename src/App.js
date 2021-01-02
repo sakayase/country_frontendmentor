@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
+import Country from './Country';
 
 class App extends Component{
   state = {
@@ -53,15 +54,8 @@ class App extends Component{
             </form>
           </div>
 
-          <div className="mosaique">
-              <div className="mosaique--country">
-                <img className="country--flag" src={homeData[0][4]} alt={`Flag of ${homeData[0][0]}`}/>
-                <h2 className="country--name">{homeData[0][0]}</h2>
-                <p className="country--pop">Population = {homeData[0][2]}</p>
-                <p className="country--region">Region: {homeData[0][1]}</p>
-                <p className="country--capital">Capital: {homeData[0][3]}</p>
-              </div>
-          </div>
+          <Country data={homeData}/>
+          
         </div>    
       )
     } else {
