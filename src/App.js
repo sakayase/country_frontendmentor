@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
 import axios from 'axios';
 import Country from './Country';
+import Header from './Header';
+import SearchBar from './SearchBar';
 
 class App extends Component{
   state = {
@@ -32,27 +33,9 @@ class App extends Component{
     if (Object.keys(this.state.data).length !== 0){
       return (
         <div className="App">
-          <div className="header">
-            <h1 className="header--title">
-              Where in the world?
-            </h1>
-            <button className="header--toggleNight">
-              Dark Mode
-            </button>
-          </div>
+          <Header/>
 
-          <div className="searchBar">
-            <form>
-              <input type="text" name="name" id="" className="search--name"/>
-              <select name="filter" id="" className="search--filter">
-                <option value="Africa" className="filter--continent">Africa</option>
-                <option value="America" className="filter--continent">America</option>
-                <option value="Asia" className="filter--continent">Asia</option>
-                <option value="Europe" className="filter--continent">Europe</option>
-                <option value="Oceania" className="filter--continent">Oceania</option>
-              </select>
-            </form>
-          </div>
+          <SearchBar/>
 
           <Country data={homeData}/>
           
