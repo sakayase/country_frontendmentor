@@ -63,7 +63,7 @@ class App extends Component {
   }
 
   handleSubmitText = (e) => {
-    e.preventDefault(); // MARCHE PAS PUTAIN !!!!!!!
+    e.preventDefault(); // MARCHE PAS PUTAIN !!!!!!  tester de passer par une fonction intermediaire
     axios.get(`https://restcountries.eu/rest/v2/name/${this.state.inputText}`)
       .then(res => {
         const countryData = [res.data[0].flag, res.data[0].name, res.data[0].nativeName, res.data[0].population, res.data[0].region, res.data[0].subregion, res.data[0].capital, res.data[0].topLevelDomain[0], res.data[0].currencies, res.data[0].languages, res.data[0].borders];
