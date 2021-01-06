@@ -33,21 +33,23 @@ class App extends Component {
   }
 
   handleBack = () => {
+    
     this.setState({
       dataClick: [],
+      inputText: '',
     })
   }
 
   handleChangeSelect = (event) => {
     if (event.target.value === "") {
-      axios.get(`https://restcountries.eu/rest/v2/all`) //${event.target.id}
+      axios.get(`https://restcountries.eu/rest/v2/region/${event.target.value}`) //${event.target.id}
         .then(res => {
           this.setState({
             data: res.data,
           })
         })
     } else {
-      axios.get(`https://restcountries.eu/rest/v2/region/${event.target.value}`) //${event.target.id}
+      axios.get(`https://restcountries.eu/rest/v2/all`) //${event.target.id}
         .then(res => {
           this.setState({
             data: res.data,
@@ -56,15 +58,16 @@ class App extends Component {
     }
   }
 
-  handleChangeText = (event) => {
+  getInputComponent = (input) => {
     this.setState({
-      inputText: event.target.value,
+      inputText: input,
     })
   }
 
-  handleSubmitText = (e) => {
-    e.preventDefault(); // MARCHE PAS PUTAIN !!!!!!  tester de passer par une fonction intermediaire
-    axios.get(`https://restcountries.eu/rest/v2/name/${this.state.inputText}`)
+
+  handleSubmitText = () => {
+    // event.preventDefault(); passé par une fonction intermediaire dans SearchBar.js
+    axios.get(`https://restcountries.eu/rest/v2/name/${this.state.inputText}?fullText=true`)
       .then(res => {
         const countryData = [res.data[0].flag, res.data[0].name, res.data[0].nativeName, res.data[0].population, res.data[0].region, res.data[0].subregion, res.data[0].capital, res.data[0].topLevelDomain[0], res.data[0].currencies, res.data[0].languages, res.data[0].borders];
         this.setState({
@@ -72,13 +75,6 @@ class App extends Component {
         })
       })
       .catch(error => {
-        axios.get(`https://restcountries.eu/rest/v2/all`) //${event.target.id}
-        console.log(error)
-        .then(res => {
-          this.setState({
-            data: res.data,
-          })
-        })
       })
     }
 
@@ -102,7 +98,7 @@ class App extends Component {
         <div className="App">
           <Header />
 
-          <SearchBar onChange={this.handleChangeSelect.bind(this)} onChangeText={this.handleChangeText.bind(this)} onSubmit={this.handleSubmitText}/>
+          <SearchBar onChange={this.handleChangeSelect.bind(this)} onSubmitText={this.handleSubmitText.bind(this)} getInputComponent={this.getInputComponent.bind(this)}/>
 
           <Country onClick={this.handleClick.bind(this)} data={homeData} />
 
