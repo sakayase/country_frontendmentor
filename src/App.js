@@ -58,10 +58,11 @@ class App extends Component {
     }
   }
 
-  getInputComponent = (input) => {
+  getInputComponent = (input, callback) => {
     this.setState({
       inputText: input,
     })
+    callback(); //a fix
   }
 
 

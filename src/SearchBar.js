@@ -12,8 +12,7 @@ export default class SearchBar extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.getInputComponent(this.state.inputText);     // OK, mais maintenant pb de synchro, faut faire entrée deux fois car premiere fois il prend pas en compte le nouvel input
-        this.props.onSubmitText();
+        this.props.getInputComponent(this.state.inputText, this.props.onSubmitText());     // OK, mais maintenant pb de synchro, faut faire entrée deux fois car premiere fois il prend pas en compte le nouvel input
     }
 
     handleChangeText = (event) => {
